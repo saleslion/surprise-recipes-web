@@ -9,6 +9,5 @@
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*"],        // ✅ Only compile frontend
-  "exclude": ["api", "node_modules", "dist"]  // ✅ Skip backend
+  "include": ["src/**/*"]
 }
