@@ -1,4 +1,5 @@
 // api/recipes.ts
+import fetch from 'node-fetch';
 
 export default async function handler(req: any, res: any) {
   try {
