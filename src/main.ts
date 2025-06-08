@@ -5,12 +5,12 @@ async function fetchRecipes(): Promise<void> {
   recipesContainer.innerHTML = '<p>Loading recipes...</p>';
 
   try {
-    const response = await fetch('https://run.mocky.io/v3/013b5a9d-f185-4d42-a5b7-e658d226ae88');
+    const response = await fetch('/api/recipes');
     const data = await response.json();
-    const recipes = data.recipes || [];
+    const recipes = data.recipes;
 
-    if (recipes.length < 4) {
-      recipesContainer.innerHTML = '<p>Less than 4 recipes returned. Please try again.</p>';
+    if (!recipes || recipes.length === 0) {
+      recipesContainer.innerHTML = '<p>No recipes found.</p>';
       return;
     }
 
