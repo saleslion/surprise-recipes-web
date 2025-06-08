@@ -1,34 +1,34 @@
-async function fetchRecipes(): Promise<void> {
-  const recipesContainer = document.getElementById('recipes');
-  if (!recipesContainer) return;
+async function fetchRecipes() {
+  const container = document.getElementById('recipes');
+  if (!container) return;
 
-  recipesContainer.innerHTML = '<p>Loading recipes...</p>';
+  container.innerHTML = 'Loading...';
 
   try {
     const response = await fetch('/api/recipes');
     const data = await response.json();
-    const recipes = data.recipes;
 
-    if (!recipes || recipes.length === 0) {
-      recipesContainer.innerHTML = '<p>No recipes found.</p>';
+    if (!data.recipes?.length) {
+      container.innerHTML = 'No recipes found.';
       return;
     }
 
-    recipesContainer.innerHTML = '';
-    recipes.forEach((recipe: any) => {
+    container.innerHTML = '';
+    data.recipes.forEach((r: any) => {
       const div = document.createElement('div');
       div.className = 'recipe';
       div.innerHTML = `
-        <h3>${recipe.title}</h3>
-        <p>${recipe.description}</p>
-        <a href="${recipe.url}" target="_blank">View Recipe</a>
+        <h3>${r.title}</h3>
+        <p>${r.description}</p>
+        <a href="${r.url}" target="_blank">View full recipe</a>
       `;
-      recipesContainer.appendChild(div);
+      container.appendChild(div);
     });
   } catch (err) {
     console.error(err);
-    recipesContainer.innerHTML = '<p>Failed to load recipes. Please try again later.</p>';
+    container.innerHTML = 'Failed to load recipes. Please try again later.';
   }
 }
 
+// Attach to global for onclick binding
 (window as any).fetchRecipes = fetchRecipes;

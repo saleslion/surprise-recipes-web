@@ -2,7 +2,7 @@
   "name": "surprise-recipes-web",
   "version": "1.0.0",
   "scripts": {
-    "build": "tsc --project tsconfig.frontend.json"
+    "build": "tsc --project tsconfig.frontend.json && cp src/index.html dist/"
   },
   "devDependencies": {
     "typescript": "^5.0.0"

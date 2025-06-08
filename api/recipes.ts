@@ -1,3 +1,5 @@
+// api/recipes.ts
+
 export default async function handler(req: any, res: any) {
   try {
     const recipes = [];
@@ -11,17 +13,14 @@ export default async function handler(req: any, res: any) {
         recipes.push({
           title: meal.strMeal,
           description: meal.strInstructions?.slice(0, 150) + '...',
-          url: meal.strSource || `https://themealdb.com/meal/${meal.idMeal}`,
+          url: meal.strSource || `https://themealdb.com/meal/${meal.idMeal}`
         });
       }
     }
 
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ recipes }));
-  } catch (error) {
-    console.error('Error fetching recipes:', error);
-    res.statusCode = 500;
-    res.end(JSON.stringify({ error: 'Failed to fetch recipes.' }));
+    res.status(200).json({ recipes });
+  } catch (err) {
+    console.error('Error fetching recipes:', err);
+    res.status(500).json({ error: 'Failed to fetch recipes.' });
   }
 }
