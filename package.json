@@ -1,0 +1,11 @@
+{
+  "name": "surprise-recipes-web",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
